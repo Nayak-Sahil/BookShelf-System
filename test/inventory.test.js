@@ -32,4 +32,10 @@ describe('Inventory', () => {
         const isAvailable = inventory.isAvailable('332-999-001');
         expect(isAvailable).toBe(true);
     });
+
+    test('should reduce a copy of the book', () => { 
+        inventory.addBook(book);
+        inventory.reduceCopy('332-999-001'); 
+        expect(book.copies).toBe(1); 
+    });
 });
