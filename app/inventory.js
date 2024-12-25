@@ -9,7 +9,12 @@ class Inventory{
 
     findBookByISBN(ISBN){
         return this.books.find(book => book.ISBN === ISBN);
-    }
+    }  
+    
+    isAvailable(ISBN) {
+        const book = this.findBookByISBN(ISBN);
+        return book && book.copies > 0;
+    }    
 }
 
 module.exports = Inventory;
