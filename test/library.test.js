@@ -11,12 +11,23 @@ describe('Library', () => {
         library = new Library(inventory); //* To make loose coupling between classes, inject the inventory object to the library class.
     });
 
-    test('should initialize library with an inventory configuration', () => {        
+    test('should initialize library with an inventory configuration', () => {
         expect(library.inventory).toBe(inventory);
     });
 
-    test('should borrow a book if available', () => { 
-        library.borrowBook('002-555-362'); 
-        expect(inventory.findBookByISBN('002-555-362').copies).toBe(1); 
+    test('should borrow a book if available', () => {
+        library.borrowBook('002-555-362');
+        expect(inventory.findBookByISBN('002-555-362').copies).toBe(1);
+    });
+
+    describe("Error handling", () => {
+        test('should throw an error if book is not available', () => {
+            library.borrowBook('002-555-362');
+            library.borrowBook('002-555-362');
+
+            expect(() => {
+                library.borrowBook('002-555-362');
+            }).toThrow("Book isn't available");
+        });
     });
 });
