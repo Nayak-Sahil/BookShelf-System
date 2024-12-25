@@ -20,6 +20,12 @@ describe('Library', () => {
         expect(inventory.findBookByISBN('002-555-362').copies).toBe(1);
     });
 
+    test('should return a book if borrowed', () => {
+        library.borrowBook('002-555-362');
+        library.returnBook('002-555-362');
+        expect(inventory.findBookByISBN('002-555-362').copies).toBe(2);
+    });
+
     describe("Error handling", () => {
         test('should throw an error if book is not available', () => {
             library.borrowBook('002-555-362');
