@@ -15,6 +15,13 @@ class Inventory{
         const book = this.findBookByISBN(ISBN);
         return book && book.copies > 0;
     }    
+
+    reduceCopy(ISBN) {
+        const book = this.findBookByISBN(ISBN);
+        if (book && book.copies > 0) {
+          book.copies -= 1;
+        }
+    }    
 }
 
 module.exports = Inventory;
