@@ -1,7 +1,14 @@
 const Inventory = require("../app/inventory");
 
 
-test('should initialize inventory with an empty books array', () => {
-    let inventory = new Inventory();
-    expect(inventory.books).toEqual([]);
+describe('Inventory', () => {
+    let inventory;
+    
+    beforeEach(() => {
+        inventory = new Inventory();
+    });
+
+    test('should initialize inventory with an empty books array', () => {
+        expect(inventory.books).toEqual([]);
+    });
 });
