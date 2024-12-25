@@ -20,9 +20,16 @@ describe('Inventory', () => {
     });
 
     test('should find a book by ISBN', () => {
-        inventory.addBook(book);
+        inventory.addBook(book); //? Add a book to the inventory to be able to find it
 
         let foundBook = inventory.findBookByISBN("332-999-001");
         expect(foundBook).toEqual(book);
+    });
+
+    test('should check if a book is available', () => {
+        inventory.addBook(book); //? Add a book to the inventory to be able to check if it is available
+
+        const isAvailable = inventory.isAvailable('332-999-001');
+        expect(isAvailable).toBe(true);
     });
 });
