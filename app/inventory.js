@@ -23,6 +23,10 @@ class Inventory{
             throw new Error(`Book with ISBN ${ISBN} not found.`);
         }
 
+        if (book.copies === 0) {
+            throw new Error(`No copies available for book with ISBN ${ISBN}.`);
+        }
+
         if (book && book.copies > 0) {
           book.copies -= 1;
         }
