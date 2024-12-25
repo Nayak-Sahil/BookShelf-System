@@ -43,4 +43,12 @@ describe('Inventory', () => {
         //* No book is added to the inventory with this ISBN.
         expect(() => inventory.reduceCopy('999-999-999')).toThrow('Book with ISBN 999-999-999 not found.');
     });
+
+    test('should throw an error if the book has no copies left', () => {
+        //* Firstly add a book to the inventory with 0 copies. 
+        const noCopiesBook = new Book('123-456-789', 'Out of Stock', 'Author', 2024, 0);
+        inventory.addBook(noCopiesBook);
+
+        expect(() => inventory.reduceCopy('123-456-789')).toThrow('No copies available for book with ISBN 123-456-789.');
+    });
 });
