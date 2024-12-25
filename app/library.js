@@ -10,6 +10,10 @@ class Library {
             throw new Error("Book isn't available");           
         }
     }
+
+    returnBook(ISBN) {
+        this.inventory.increaseCopy(ISBN);
+    }
 }
 
 module.exports = Library;
