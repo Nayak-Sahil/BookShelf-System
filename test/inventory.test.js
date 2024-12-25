@@ -34,11 +34,18 @@ describe('Inventory', () => {
     });
 
     test('should reduce a copy of the book', () => { 
-        inventory.addBook(book);
+        inventory.addBook(book); //? Add a book to the inventory to be able to reduce its copies
+
         inventory.reduceCopy('332-999-001'); 
         expect(book.copies).toBe(1);
     });
     
+    test('should increase a copy of the book', () => { 
+        inventory.addBook(book); //? Add a book to the inventory to be able to increase its copies
+
+        inventory.increaseCopy('332-999-001'); 
+        expect(book.copies).toBe(3); 
+    });
 
     describe('Error Handling', () => {
         test('should throw an error if the book with the given ISBN is not found', () => {
