@@ -1,0 +1,19 @@
+{
+  "name": "bookshelf-system",
+  "version": "1.0.0",
+  "description": "Efficient Library Management System",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "keywords": [
+    "TDD",
+    "LMS",
+    "Jest"
+  ],
+  "author": "Sahil Nayak",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
