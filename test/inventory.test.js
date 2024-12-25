@@ -36,6 +36,11 @@ describe('Inventory', () => {
     test('should reduce a copy of the book', () => { 
         inventory.addBook(book);
         inventory.reduceCopy('332-999-001'); 
-        expect(book.copies).toBe(1); 
+        expect(book.copies).toBe(1);
+    });
+    
+    test('should throw an error if the book with the given ISBN is not found', () => {
+        //* No book is added to the inventory with this ISBN.
+        expect(() => inventory.reduceCopy('999-999-999')).toThrow('Book with ISBN 999-999-999 not found.');
     });
 });
