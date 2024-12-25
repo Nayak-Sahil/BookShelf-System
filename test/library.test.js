@@ -14,4 +14,9 @@ describe('Library', () => {
     test('should initialize library with an inventory configuration', () => {        
         expect(library.inventory).toBe(inventory);
     });
+
+    test('should borrow a book if available', () => { 
+        library.borrowBook('002-555-362'); 
+        expect(inventory.findBookByISBN('002-555-362').copies).toBe(1); 
+    });
 });
