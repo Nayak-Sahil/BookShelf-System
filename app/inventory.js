@@ -18,6 +18,11 @@ class Inventory{
 
     reduceCopy(ISBN) {
         const book = this.findBookByISBN(ISBN);
+
+        if (!book) {
+            throw new Error(`Book with ISBN ${ISBN} not found.`);
+        }
+
         if (book && book.copies > 0) {
           book.copies -= 1;
         }
