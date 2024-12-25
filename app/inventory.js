@@ -3,8 +3,12 @@ class Inventory{
         this.books = [];
     }
 
-    addBook(book){
+    addBook(book){ // Receive a book object and add it to the inventory
         this.books.push(book);
+    }
+
+    findBookByISBN(ISBN){
+        return this.books.find(book => book.ISBN === ISBN);
     }
 }
 
