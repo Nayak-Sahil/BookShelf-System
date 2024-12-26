@@ -22,16 +22,16 @@ describe('TransactionManager', () => {
         expect(transactionManager.transactions).toContain(transaction);
     });
 
-    test('should find a transaction by ID', () => { 
+    test('should find a transaction by ID', () => {
         let transactionID = 23113;
         const initTrans = new Transaction(book, new Date());
         const transaction = transactionManager.logBorrowTransaction(initTrans, transactionID);
 
         const foundTransaction = transactionManager.findTransaction(transactionID);
-        expect(foundTransaction).toEqual(transaction); 
+        expect(foundTransaction).toEqual(transaction);
     });
 
-    test("should create a transaction for return book", ()=>{
+    test("should create a transaction for return book", () => {
         let transactionID = 23113;
         const initTrans = new Transaction(book, new Date());
         const borrowedTransaction = transactionManager.logBorrowTransaction(initTrans, transactionID);
@@ -39,4 +39,13 @@ describe('TransactionManager', () => {
         const returnedTransaction = transactionManager.logReturnTransaction(transactionID);
         expect(returnedTransaction.returnDate).toBeDefined();
     });
+
+    describe("Error Handling", () => {
+        test('should throw an error if transaction ID is not found', () => {
+            let transactionID = 87895;
+            expect(() => {
+                transactionManager.findTransaction(transactionID);
+            }).toThrow(`Transaction with ID ${transactionID} not found`);
+        });
+    })
 });
