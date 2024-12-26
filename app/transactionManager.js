@@ -3,8 +3,8 @@ class TransactionManager{
         this.transactions = [];
     }
 
-    logBorrowTransaction(transaction){
-        transaction.id = Math.floor(Math.random() * 10000);
+    logBorrowTransaction(transaction, transactionId){
+        transaction.id = transactionId || Math.floor(Math.random() * 10000);
         this.transactions.push(transaction);
         return transaction;
     }
