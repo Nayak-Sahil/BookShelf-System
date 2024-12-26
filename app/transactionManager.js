@@ -10,7 +10,13 @@ class TransactionManager{
     }
 
     findTransaction(transactionID){
-        return this.transactions.find((transaction) => transaction.ID == transactionID);
+        let foundTransaction = this.transactions.find((transaction) => transaction.ID == transactionID);
+
+        if(foundTransaction == undefined){
+            throw new Error(`Transaction with ID ${transactionID} not found`);
+        }
+
+        return foundTransaction;
     }
 
     logReturnTransaction(transactionID){
