@@ -22,4 +22,12 @@ describe('TransactionManager', () => {
         expect(transactionManager.transactions).toContain(transaction);
     });
 
+    test('should find a transaction by ID', () => { 
+        let transactionID = 23113;
+        const initTrans = new Transaction(book, new Date());
+        const transaction = transactionManager.logBorrowTransaction(initTrans, transactionID);
+
+        const foundTransaction = transactionManager.findTransaction(transactionID);
+        expect(foundTransaction).toEqual(transaction); 
+    });
 });
