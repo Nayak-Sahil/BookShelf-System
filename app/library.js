@@ -20,8 +20,11 @@ class Library {
         }
     }
 
-    returnBook(ISBN) {
+    returnBook(ISBN, transactionID) {
+        const returnedBookTransaction = this.transactionManager.logReturnTransaction(transactionID);        
         this.inventory.increaseCopy(ISBN);
+
+        return returnedBookTransaction;
     }
 }
 
