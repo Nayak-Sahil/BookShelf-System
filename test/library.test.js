@@ -1,14 +1,22 @@
 const Library = require('../app/library');
 const Inventory = require('../app/inventory');
 const Book = require('../app/book');
+const TransactionManager = require('../app/transactionManager');
+const Transaction = require('../app/transaction');
 
 describe('Library', () => {
-    let library, inventory, book;
+    let library, inventory, book, transactionManager, borrowedDate;
 
     beforeEach(() => {
         inventory = new Inventory();
         book = new Book('002-555-362', 'Introduction to Jest', 'Sahil Nayak', 2024, 2); inventory.addBook(book);
-        library = new Library(inventory); //* To make loose coupling between classes, inject the inventory object to the library class.
+
+        //? To inject TransactionManager in library
+        transactionManager = new TransactionManager();
+
+        borrowedDate = new Date();
+
+        library = new Library(inventory, transactionManager); //* To make loose coupling between classes, inject the inventory object to the library class.
     });
 
     test('should initialize library with an inventory configuration', () => {
@@ -16,15 +24,25 @@ describe('Library', () => {
     });
 
     test('should borrow a book if available', () => {
-        library.borrowBook('002-555-362');
+        library.borrowBook('002-555-362', borrowedDate);
         expect(inventory.findBookByISBN('002-555-362').copies).toBe(1);
     });
 
     test('should return a book if borrowed', () => {
-        library.borrowBook('002-555-362');
+        library.borrowBook('002-555-362', borrowedDate);
         library.returnBook('002-555-362');
         expect(inventory.findBookByISBN('002-555-362').copies).toBe(2);
     });
+
+    describe("Integration With Transaction Module", ()=>{
+        test('should borrow a book and log transaction', () => {
+            let borrowedTransaction = library.borrowBook('002-555-362', borrowedDate);
+            let borrowedBook = inventory.findBookByISBN('002-555-362');
+            expect(borrowedBook.copies).toBe(1);
+
+            expect(borrowedTransaction.borrowDate).toEqual(borrowedDate);
+        });
+    })
 
     describe("Error handling", () => {
         test('should throw an error if book is not available', () => {
