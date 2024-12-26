@@ -29,8 +29,9 @@ describe('Library', () => {
     });
 
     test('should return a book if borrowed', () => {
-        library.borrowBook('002-555-362', borrowedDate);
-        library.returnBook('002-555-362');
+        let borrowedTransaction = library.borrowBook('002-555-362', borrowedDate);
+        library.returnBook('002-555-362', borrowedTransaction.ID);
+        
         expect(inventory.findBookByISBN('002-555-362').copies).toBe(2);
     });
 
@@ -41,6 +42,13 @@ describe('Library', () => {
             expect(borrowedBook.copies).toBe(1);
 
             expect(borrowedTransaction.borrowDate).toEqual(borrowedDate);
+        });
+
+        test('should return a book if borrowed', () => {
+            let borrowedTransaction = library.borrowBook('002-555-362', borrowedDate);
+            let returnBookTransaction = library.returnBook('002-555-362',borrowedTransaction.ID);
+
+            expect(returnBookTransaction.returnDate).toBeDefined();
         });
     })
 
