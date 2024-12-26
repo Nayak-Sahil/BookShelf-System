@@ -30,4 +30,13 @@ describe('TransactionManager', () => {
         const foundTransaction = transactionManager.findTransaction(transactionID);
         expect(foundTransaction).toEqual(transaction); 
     });
+
+    test("should create a transaction for return book", ()=>{
+        let transactionID = 23113;
+        const initTrans = new Transaction(book, new Date());
+        const borrowedTransaction = transactionManager.logBorrowTransaction(initTrans, transactionID);
+
+        const returnedTransaction = transactionManager.logReturnTransaction(transactionID);
+        expect(returnedTransaction.returnDate).toBeDefined();
+    });
 });
