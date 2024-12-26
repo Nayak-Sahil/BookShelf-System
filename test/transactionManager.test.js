@@ -16,8 +16,8 @@ describe('TransactionManager', () => {
     });
 
     test('should create a transaction and add it to the transactions list', () => {
-        const transaction = new Transaction(book, new Date());
-        transactionManager.storeTransaction(transaction);
+        const initTrans = new Transaction(book, new Date());
+        const transaction = transactionManager.storeTransaction(initTrans);
 
         expect(transactionManager.transactions).toContain(transaction);
     });
