@@ -9,7 +9,8 @@ describe('Library', () => {
 
     beforeEach(() => {
         inventory = new Inventory();
-        book = new Book('002-555-362', 'Introduction to Jest', 'Sahil Nayak', 2024, 2); inventory.addBook(book);
+        book = new Book('002-555-362', 'Introduction to Jest', 'Sahil Nayak', 2024, 2, 'General'); 
+        inventory.addBook(book);
 
         //? To inject TransactionManager in library
         transactionManager = new TransactionManager();
@@ -62,4 +63,17 @@ describe('Library', () => {
             }).toThrow("Book isn't available");
         });
     });
+
+    test("should return a book of specific category", ()=>{
+        let book1 = new Book('002-555-368', 'Introduction to javascript', 'rahul patel', 2024, 2, "General"); 
+        let book2 = new Book('002-555-361', 'Advance to Jest', 'Joy Ray', 2024, 3, "General"); 
+
+        inventory.addBook(book1);
+        inventory.addBook(book2);
+
+        let books = library.getBooksByCategory('General');
+
+        expect(books).toContain(book1);
+        expect(books).toContain(book2);
+    })
 });
